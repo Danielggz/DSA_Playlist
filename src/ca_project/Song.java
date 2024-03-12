@@ -41,4 +41,10 @@ public class Song {
     public String getReleaseYear() {
         return releaseYear;
     }
+
+    @Override
+    public String toString() {
+        return "Song: " + "name=" + name + ", album=" + album + ", releaseYear=" + releaseYear + '\n';
+    }
+
 }

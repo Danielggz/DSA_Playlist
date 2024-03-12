@@ -10,20 +10,35 @@ package ca_project;
  * 12/03/2024
  */
 public class Playlist implements DLLInterface{
+    
+    private Node head;
+    private Node last;
+    private Node curr;
+    private int size; //manually manage the list size
 
+    public Playlist() {
+        //Sets name of the playlist from user and creates the necessary nodes
+        head = null; 
+        last = null; 
+        size = 0;
+        curr = head;
+    }
+    
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //Returns boolean depending if the list is empty
+        return (size == 0);
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return size;
     }
 
     @Override
     public Object get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setCurrent(index);
+        return curr;
     }
 
     @Override
@@ -33,12 +48,57 @@ public class Playlist implements DLLInterface{
 
     @Override
     public void add(int index, Object theElement) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //Inserts new node if the list is empty
+        if (size == 0){        
+            Node newNode = new Node(theElement, null, null);
+            head = newNode;
+            last = newNode; 
+        } else {
+            // Insert a new Node at the head position
+            if (index == 1){
+                Node newNode = new Node(theElement, null, null);
+                //set up the links
+                newNode.setNext(head);
+                head.setPrev(newNode);
+                //add the newNode in the head position
+                head = newNode;    
+            } else if (index == (size+1)){  
+                // Insert a new Node at the last position
+                Node newNode = new Node(theElement, null, null);
+                newNode.setPrev(last); //set up link to prev
+                last.setNext(newNode); //set up link to the new node
+                last = newNode; //add the newNode to the last reference  
+            }else {
+                // Insert a new node in the middle
+                setCurrent(index); //use method to move the curr ref to that position
+                Node newNode = new Node(theElement, null, null);
+                //set up the ref links
+                newNode.setNext(curr); 
+                Node prev = curr.getPrev(); //set the prev ref
+                newNode.setPrev(prev); //link to it
+                prev.setNext(newNode);//add our new node
+                curr.setPrev(newNode); //add our new node
+            }
+          }
+          size++;
     }
 
     @Override
-    public void printList() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String printList() {
+        String output = "";
+        for (Node aNode = head; aNode != null; aNode = aNode.getNext()) {
+            output += aNode.getElement();
+         }
+        return output;
+    }
+    
+    private void setCurrent(int index){
+        //Sets the node on the position index to be the current
+	curr = head;
+        //Iterates the full list from the head
+	for (int i  = 1; i < index; i++){ 
+		curr = curr.getNext();
+        }
     }
     
 }

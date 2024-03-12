@@ -13,8 +13,10 @@ public class MusicGUI extends javax.swing.JFrame {
     /**
      * Creates new form MusicGUI
      */
+    Playlist playList;
     public MusicGUI() {
         initComponents();
+        playList = new Playlist();
     }
 
     /**
@@ -26,21 +28,141 @@ public class MusicGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTitle = new javax.swing.JLabel();
+        lblNameSong = new javax.swing.JLabel();
+        txtNameSong = new javax.swing.JTextField();
+        btnAddSong = new javax.swing.JButton();
+        lblSong = new javax.swing.JLabel();
+        lblAlbum = new javax.swing.JLabel();
+        txtAlbum = new javax.swing.JTextField();
+        lblReleaseYear = new javax.swing.JLabel();
+        txtReleaseYear = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtareaDisplay = new javax.swing.JTextArea();
+        btnDisplay = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblTitle.setText("My Playlist App");
+
+        lblNameSong.setText("Name");
+
+        btnAddSong.setText("Add Song");
+        btnAddSong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddSongActionPerformed(evt);
+            }
+        });
+
+        lblSong.setText("Song");
+
+        lblAlbum.setText("Album");
+
+        lblReleaseYear.setText("Release Year");
+
+        txtareaDisplay.setColumns(20);
+        txtareaDisplay.setRows(5);
+        jScrollPane1.setViewportView(txtareaDisplay);
+
+        btnDisplay.setText("Display");
+        btnDisplay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisplayActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 815, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(259, 259, 259)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(353, 353, 353)
+                        .addComponent(btnDisplay))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSong, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAddSong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblNameSong, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtNameSong, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lblAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lblReleaseYear, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtReleaseYear, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(lblSong)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNameSong)
+                    .addComponent(txtNameSong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAlbum)
+                    .addComponent(txtAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblReleaseYear)
+                    .addComponent(txtReleaseYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addComponent(btnAddSong)
+                .addGap(53, 53, 53)
+                .addComponent(btnDisplay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayActionPerformed
+        // TODO add your handling code here:
+        txtareaDisplay.setText(playList.printList());
+    }//GEN-LAST:event_btnDisplayActionPerformed
+
+    private void btnAddSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSongActionPerformed
+        // TODO add your handling code here:
+        String name = txtNameSong.getText();
+        String album = txtAlbum.getText();
+        String rYear = txtReleaseYear.getText();
+        
+        Song newSong = new Song(name, album, rYear);
+        
+        //Add song to playList to the end of the list (index = size of the current list + 1)
+        playList.add(playList.size() + 1, newSong);
+        
+        //Remove text from textfields and inform user
+        txtNameSong.setText("");
+        txtAlbum.setText("");
+        txtReleaseYear.setText("");
+        txtareaDisplay.setText("Song added to playList!");
+    }//GEN-LAST:event_btnAddSongActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +200,17 @@ public class MusicGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddSong;
+    private javax.swing.JButton btnDisplay;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAlbum;
+    private javax.swing.JLabel lblNameSong;
+    private javax.swing.JLabel lblReleaseYear;
+    private javax.swing.JLabel lblSong;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextField txtAlbum;
+    private javax.swing.JTextField txtNameSong;
+    private javax.swing.JTextField txtReleaseYear;
+    private javax.swing.JTextArea txtareaDisplay;
     // End of variables declaration//GEN-END:variables
 }

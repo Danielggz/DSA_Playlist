@@ -17,5 +17,5 @@ public interface DLLInterface {
     public void remove(int index);
     public void add(int index, Object theElement);
     //public void add(Object element);
-    public void printList();
+    public String printList();
 }
