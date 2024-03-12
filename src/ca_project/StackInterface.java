@@ -11,5 +11,11 @@ package ca_project;
  * 12/03/2024
  */
 public interface StackInterface {
+    public void push(Object newItem);
+    public Object pop();    
+    public Object peek();
 
+    public boolean isEmpty();
+    public int size();
+    public String displayStack();
 }
