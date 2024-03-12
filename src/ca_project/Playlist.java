@@ -92,6 +92,38 @@ public class Playlist implements DLLInterface{
         return output;
     }
     
+    public Song searchByName(String name){
+        //Iterates element to find by Name
+        curr = head;
+        for (int i  = 1; i < size; i++){
+            //Get element from node and cast it to Song type
+            Song currSong = (Song) curr.getElement();
+            if(name.equalsIgnoreCase(currSong.getName())){
+                //If the searched name is equal to the song in the current node return
+                return currSong;
+            }
+            curr = curr.getNext();
+        }
+        return null;
+    } 
+    
+    public void moveElement(int index, int newIndex){
+        //Store the reference to the object of the index given
+        Node oldNodeRef = (Node) get(index); 
+        //Create a copy to store the value of the object from the reference (with same next and prev)
+        Node oldNodeTemp = new Node(oldNodeRef.getElement(), oldNodeRef.getPrev(), oldNodeRef.getNext());
+        //Store the element in the position of the new index
+        Node newNode = (Node) get(newIndex); 
+        
+        //Set the current to be the element to change
+        setCurrent(index);
+        curr.setElement(newNode.getElement());
+        setCurrent(newIndex);
+        //Get the old node from the temp node
+        curr.setElement(oldNodeTemp.getElement());
+        
+    }
+    
     private void setCurrent(int index){
         //Sets the node on the position index to be the current
 	curr = head;

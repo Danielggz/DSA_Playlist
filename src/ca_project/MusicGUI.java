@@ -4,6 +4,8 @@
  */
 package ca_project;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Daniel García
@@ -52,6 +54,9 @@ public class MusicGUI extends javax.swing.JFrame {
         txtareaDisplayR = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnMove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +104,27 @@ public class MusicGUI extends javax.swing.JFrame {
 
         jButton2.setText("DisplayClassical");
 
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnMove.setText("Move");
+        btnMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,14 +171,23 @@ public class MusicGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(btnSearch)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMove)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +206,11 @@ public class MusicGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAlbum)
                             .addComponent(txtAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblReleaseYear)
                             .addComponent(txtReleaseYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblGenre))
@@ -184,7 +219,13 @@ public class MusicGUI extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addComponent(btnDisplayAll)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSearch)
+                            .addComponent(btnMove)
+                            .addComponent(btnDelete))
+                        .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
@@ -214,9 +255,6 @@ public class MusicGUI extends javax.swing.JFrame {
         
         Song newSong = new Song(name, album, rYear);
         
-        //Add song to playList to the end of the list (index = size of the current list + 1)
-        playList.add(playList.size() + 1, newSong);
-        
         //Get genre selection to add to one of the Stacks
         int genreSel = cmbGenre.getSelectedIndex();
         switch(genreSel){
@@ -228,18 +266,44 @@ public class MusicGUI extends javax.swing.JFrame {
                 //Classical selected
                 classicalG.push(newSong);
                 break;
-            default:
-                //No selection
-                
-                break;
         }
-        
-        //Remove text from textfields and inform user
-        txtNameSong.setText("");
-        txtAlbum.setText("");
-        txtReleaseYear.setText("");
-        txtareaDisplayAll.setText("Song added to playList!");
+        if(name.isBlank() || genreSel == 0){
+            JOptionPane.showMessageDialog(null, "Please introduce at least the name of the song and select a genre");
+        }else{
+            //Add song to playList to the end of the list (index = size of the current list + 1)
+            playList.add(playList.size() + 1, newSong);
+            
+            //Remove text from textfields and inform user
+            txtNameSong.setText("");
+            txtAlbum.setText("");
+            txtReleaseYear.setText("");
+            cmbGenre.setSelectedIndex(0); //Set option to default
+            txtareaDisplayAll.setText("Song added to playList!");
+        }
     }//GEN-LAST:event_btnAddSongActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String nameSearch = JOptionPane.showInputDialog("Introduce song name to search");
+        Song foundSong = playList.searchByName(nameSearch);
+        //Check if the song was found
+        if(foundSong != null){
+            JOptionPane.showMessageDialog(null, "Element found: \n" + foundSong.toString());
+        }else{
+            JOptionPane.showMessageDialog(null, "Song not found in the playlist!");
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
+        // TODO add your handling code here:
+        int currPos = Integer.parseInt(JOptionPane.showInputDialog("Introduce the position of the Song you wish to move"));
+        int newPos = Integer.parseInt(JOptionPane.showInputDialog("Introduce the new position on the list to move the Song"));
+        
+        playList.moveElement(currPos, newPos);
+    }//GEN-LAST:event_btnMoveActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,7 +342,10 @@ public class MusicGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSong;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDisplayAll;
+    private javax.swing.JButton btnMove;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cmbGenre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
