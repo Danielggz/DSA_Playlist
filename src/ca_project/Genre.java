@@ -5,40 +5,76 @@
 
 package ca_project;
 
+import java.util.ArrayList;
+
 /**
  * @author Daniel García
  * 12/03/2024
  */
 public class Genre implements StackInterface{
 
+    ArrayList<Object> genreStack;
+    private String name;
+    
+    public Genre(String name) {
+        this.name = name;
+        genreStack = new ArrayList<>();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
     @Override
-    public void push(Object newItem) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void push(Object newElement) {
+        genreStack.add(0, newElement); 
     }
 
     @Override
     public Object pop() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!(genreStack.isEmpty())){
+            return genreStack.remove(0);
+        }else{
+            return null;
+        }
     }
 
     @Override
     public Object peek() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (genreStack.isEmpty()) {
+            System.out.println("Empty stack");
+            return null;
+        } else {    
+            return genreStack.get(0);
+        }
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return genreStack.isEmpty();
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return genreStack.size();
     }
 
     @Override
     public String displayStack() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String output = new String(); 
+       //String str = ""; will also work and is more familiar
+       if(genreStack.isEmpty()){
+           output += name + " list is empty!";
+       }else{
+           for (int i = 0; i<genreStack.size(); i++){
+               output += genreStack.get(i).toString();
+           }
+       }
+       return output;
     }
     
 }
