@@ -10,10 +10,11 @@ package ca_project;
  * 12/03/2024
  */
 public class Song {
-    private String name, album, releaseYear;
+    private String name, artist, album, releaseYear;
 
-    public Song(String name, String album, String releaseYear) {
+    public Song(String name, String artist, String album, String releaseYear) {
         this.name = name;
+        this.artist = artist;
         this.album = album;
         this.releaseYear = releaseYear;
     }
@@ -44,7 +45,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song: " + "name=" + name + ", album=" + album + ", releaseYear=" + releaseYear + '\n';
+        return "Song: " + "Name: " + name + ", Artist: " + artist + ", Album: " + album + ", Release Year: " + releaseYear + '\n';
     }
 
 }

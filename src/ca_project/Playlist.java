@@ -43,7 +43,12 @@ public class Playlist implements DLLInterface{
 
     @Override
     public Object remove(int index) {
-        Node nodeDel = (Node) get(index);
+        //Gets node to be deleted
+        Node nodeDel = null;
+        if(index<size){
+            //Search if index is not bigger than size (OutOfBounds)
+            nodeDel = (Node) get(index);
+        }
         if(nodeDel != null){
             if(nodeDel.getPrev() == null){
                 //If the node to delete is the head
@@ -64,6 +69,7 @@ public class Playlist implements DLLInterface{
                 nodeDel.getPrev().setNext(nextDel);
                 //Now the references are updated so the deletion node is not referenced anymore
             }
+            size--;
             return nodeDel;
         }
         return null;
@@ -80,7 +86,6 @@ public class Playlist implements DLLInterface{
             // Insert a new Node at the head position
             if (index == 1){
                 Node newNode = new Node(theElement, null, null);
-                //set up the links
                 newNode.setNext(head);
                 head.setPrev(newNode);
                 //add the newNode in the head position
@@ -111,7 +116,8 @@ public class Playlist implements DLLInterface{
         String output = "";
         for (Node aNode = head; aNode != null; aNode = aNode.getNext()) {
             output += aNode.getElement();
-         }
+        }
+        output += "\n Number of songs in the playlist: " + size;
         return output;
     }
     
@@ -131,20 +137,23 @@ public class Playlist implements DLLInterface{
     } 
     
     public void moveElement(int index, int newIndex){
-        //Store the reference to the object of the index given
-        Node oldNodeRef = (Node) get(index); 
-        //Create a copy to store the value of the object from the reference (with same next and prev)
-        Node oldNodeTemp = new Node(oldNodeRef.getElement(), oldNodeRef.getPrev(), oldNodeRef.getNext());
-        //Store the element in the position of the new index
-        Node newNode = (Node) get(newIndex); 
-        
-        //Set the current to be the element to change
-        setCurrent(index);
-        curr.setElement(newNode.getElement());
-        setCurrent(newIndex);
-        //Get the old node from the temp node
-        curr.setElement(oldNodeTemp.getElement());
-        
+        if(index < size && newIndex < size){
+            //Store the reference to the object of the index given
+            Node oldNodeRef = (Node) get(index); 
+            //Create a copy to store the value of the object from the reference (with same next and prev)
+            Node oldNodeTemp = new Node(oldNodeRef.getElement(), oldNodeRef.getPrev(), oldNodeRef.getNext());
+            //Store the element in the position of the new index
+            Node newNode = (Node) get(newIndex); 
+
+            //Set the current to be the element to change
+            setCurrent(index);
+            curr.setElement(newNode.getElement());
+            setCurrent(newIndex);
+            //Get the old node from the temp node
+            curr.setElement(oldNodeTemp.getElement());
+        }else{
+            System.out.println("One of the positions given is out of the bounds of array");
+        }
     }
     
     private void setCurrent(int index){
