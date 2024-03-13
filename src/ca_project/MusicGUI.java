@@ -261,7 +261,7 @@ public class MusicGUI extends javax.swing.JFrame {
     private void btnAddSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSongActionPerformed
         // TODO add your handling code here:
         String name = txtNameSong.getText();
-        String artist = txtArtist.getText();
+        String artist = txtNameSong.getText();
         String album = txtAlbum.getText();
         String rYear = txtReleaseYear.getText();
         
