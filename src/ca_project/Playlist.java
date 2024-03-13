@@ -15,6 +15,8 @@ public class Playlist implements DLLInterface{
     private Node last;
     private Node curr;
     private int size; //manually manage the list size
+    private String name;
+    private boolean repeat;
 
     public Playlist() {
         //Sets name of the playlist from user and creates the necessary nodes
@@ -114,8 +116,11 @@ public class Playlist implements DLLInterface{
     @Override
     public String printList() {
         String output = "";
+        //Count elements to list them
+        int counter=1;
         for (Node aNode = head; aNode != null; aNode = aNode.getNext()) {
-            output += aNode.getElement();
+            output += counter + ". " + aNode.getElement().toString();
+            counter++;
         }
         output += "\n Number of songs in the playlist: " + size;
         return output;
