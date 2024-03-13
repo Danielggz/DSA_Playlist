@@ -303,6 +303,8 @@ public class MusicGUI extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int delPos = Integer.parseInt(JOptionPane.showInputDialog("Introduce the position of the Song you wish to delete"));
+        playList.remove(delPos);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**

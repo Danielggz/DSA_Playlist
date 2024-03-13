@@ -42,8 +42,31 @@ public class Playlist implements DLLInterface{
     }
 
     @Override
-    public void remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Object remove(int index) {
+        Node nodeDel = (Node) get(index);
+        if(nodeDel != null){
+            if(nodeDel.getPrev() == null){
+                //If the node to delete is the head
+                head = head.getNext();
+            }
+            else if (nodeDel.getNext() == null) { 
+                //If the node is not the end node
+                last = last.getPrev();
+            } 
+            else{
+                //Get the node before the deleting node
+                Node prevDel = (Node) get(index-1);
+                //Set it to be the previous of the deletion-1 node
+                nodeDel.getNext().setPrev(prevDel);
+                //Get the node after deleting node
+                Node nextDel = (Node) get(index+1);
+                //Set it to be the next of deletion+1
+                nodeDel.getPrev().setNext(nextDel);
+                //Now the references are updated so the deletion node is not referenced anymore
+            }
+            return nodeDel;
+        }
+        return null;
     }
 
     @Override
