@@ -14,7 +14,6 @@ public interface StackInterface {
     public void push(Object newItem);
     public Object pop();    
     public Object peek();
-
     public boolean isEmpty();
     public int size();
     public String displayStack();

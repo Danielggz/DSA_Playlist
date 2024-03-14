@@ -45,7 +45,7 @@ public class Playlist implements DLLInterface{
     public Object remove(int index) {
         //Gets node to be deleted
         Node nodeDel = null;
-        if(index<=size){
+        if(index<=size && index>0){
             //Search if index is not bigger than size (OutOfBounds)
             nodeDel = (Node) get(index);
         }
@@ -57,6 +57,7 @@ public class Playlist implements DLLInterface{
             if (last == nodeDel) { 
                 //If the node is not the end nodeW
                 last = nodeDel.getPrev();
+                last.setNext(null);
             } 
             if(nodeDel.getPrev() != null && nodeDel.getNext() != null){
                 //set the next node reference to the previous of nodeDel
@@ -119,6 +120,19 @@ public class Playlist implements DLLInterface{
         return output;
     }
     
+    public String printRepeatable(){
+        String output = "";
+        int counter = 1;
+        for (Node aNode = head; aNode != null; aNode = aNode.getNext()) {
+            output += counter + ". " + aNode.getElement().toString();
+            counter++;
+            //Stop the loop when it comes to ten when repeatable
+            if(counter > 10) 
+                break;
+        }
+        return output;
+    }
+    
     public Song searchByName(String name){
         //Iterates element to find by Name
         curr = head;
@@ -151,6 +165,17 @@ public class Playlist implements DLLInterface{
         }else{
             System.out.println("One of the positions given is out of the bounds of array");
         }
+    }
+    
+    public Playlist getRepeatableList(){
+        Playlist repeatPl = new Playlist();
+        //Copy current playlist to a new playlist class
+        repeatPl = this;
+        //Connect head with last node
+        repeatPl.head.setPrev(last);
+        repeatPl.last.setNext(head);
+        
+        return repeatPl;
     }
     
     private void setCurrent(int index){
