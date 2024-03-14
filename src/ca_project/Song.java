@@ -45,7 +45,13 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song: " + "Name: " + name + ", Artist: " + artist + ", Album: " + album + ", Release Year: " + releaseYear + '\n';
+        String output = "";
+        output += "Song: " + "Name: " + name;
+        if(!artist.isBlank()) output += " | Artist: " + artist;
+        if(!album.isBlank())output += " | Album: " + album;
+        if(!releaseYear.isBlank())output += " | Release Year: " + releaseYear;
+        output += "\n";
+        return output;
     }
 
 }
