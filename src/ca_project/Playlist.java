@@ -122,7 +122,7 @@ public class Playlist implements DLLInterface{
     public Song searchByName(String name){
         //Iterates element to find by Name
         curr = head;
-        for (int i  = 1; i < size; i++){
+        for (int i  = 1; i <= size; i++){
             //Get element from node and cast it to Song type
             Song currSong = (Song) curr.getElement();
             if(name.equalsIgnoreCase(currSong.getName())){
