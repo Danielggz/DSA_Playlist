@@ -169,12 +169,14 @@ public class Playlist implements DLLInterface{
     
     public Playlist getRepeatableList(){
         Playlist repeatPl = new Playlist();
-        //Copy current playlist to a new playlist class
-        repeatPl = this;
+        //Add some songs to demonstrate functionality
+        repeatPl.add(repeatPl.size() + 1, new Song("Walk this Way", "Aerosmith", "Toys In The Attic", "1975"));
+        repeatPl.add(repeatPl.size() + 1, new Song("Child in Time", "Deep Purple", "Deep Purple in Rock", "1970"));
+        repeatPl.add(repeatPl.size() + 1, new Song("Fortress", "Queens of the Stone Age", "Villains", "2017"));
         //Connect head with last node
         repeatPl.head.setPrev(last);
         repeatPl.last.setNext(head);
-        
+
         return repeatPl;
     }
     

@@ -592,7 +592,7 @@ public class MusicGUI extends javax.swing.JFrame {
 
     private void checkRepeatableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkRepeatableActionPerformed
         if(checkRepeatable.isSelected()){
-            Playlist repeatPl = playList.getRepeatableList();
+            Playlist repeatPl = playList.getRepeatableList();            
             System.out.println(repeatPl.printRepeatable());
         }
     }//GEN-LAST:event_checkRepeatableActionPerformed
