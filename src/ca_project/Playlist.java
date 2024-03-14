@@ -70,7 +70,7 @@ public class Playlist implements DLLInterface{
                 //Now the references are updated so the deletion node is not referenced anymore
             }
             size--;
-            return nodeDel;
+            return nodeDel.getElement();
         }
         return null;
     }
@@ -114,8 +114,10 @@ public class Playlist implements DLLInterface{
     @Override
     public String printList() {
         String output = "";
+        int counter = 1;
         for (Node aNode = head; aNode != null; aNode = aNode.getNext()) {
-            output += aNode.getElement();
+            output += counter + ". " + aNode.getElement().toString();
+            counter++;
         }
         output += "\n Number of songs in the playlist: " + size;
         return output;

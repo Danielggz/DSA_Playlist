@@ -73,6 +73,7 @@ public class Genre implements StackInterface{
            for (int i = 0; i<genreStack.size(); i++){
                output += genreStack.get(i).toString();
            }
+           output += "\nNumber of" + name +  " songs: " + size();
        }
        return output;
     }
