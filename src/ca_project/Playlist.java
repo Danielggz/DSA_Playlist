@@ -45,28 +45,24 @@ public class Playlist implements DLLInterface{
     public Object remove(int index) {
         //Gets node to be deleted
         Node nodeDel = null;
-        if(index<size){
+        if(index<=size){
             //Search if index is not bigger than size (OutOfBounds)
             nodeDel = (Node) get(index);
         }
-        if(nodeDel != null){
-            if(nodeDel.getPrev() == null){
+        if(head != null && nodeDel != null){
+            if(head == nodeDel){
                 //If the node to delete is the head
-                head = head.getNext();
+                head = nodeDel.getNext();
             }
-            else if (nodeDel.getNext() == null) { 
-                //If the node is not the end node
-                last = last.getPrev();
+            if (last == nodeDel) { 
+                //If the node is not the end nodeW
+                last = nodeDel.getPrev();
             } 
-            else{
-                //Get the node before the deleting node
-                Node prevDel = (Node) get(index-1);
-                //Set it to be the previous of the deletion-1 node
-                nodeDel.getNext().setPrev(prevDel);
-                //Get the node after deleting node
-                Node nextDel = (Node) get(index+1);
-                //Set it to be the next of deletion+1
-                nodeDel.getPrev().setNext(nextDel);
+            if(nodeDel.getPrev() != null && nodeDel.getNext() != null){
+                //set the next node reference to the previous of nodeDel
+                nodeDel.getNext().setPrev(nodeDel.getPrev());
+                //set the prev node reference to the next of nodeDel
+                nodeDel.getPrev().setNext(nodeDel.getNext());
                 //Now the references are updated so the deletion node is not referenced anymore
             }
             size--;
@@ -139,14 +135,13 @@ public class Playlist implements DLLInterface{
     } 
     
     public void moveElement(int index, int newIndex){
-        if(index < size && newIndex < size){
+        if(index <= size && newIndex <= size){
             //Store the reference to the object of the index given
             Node oldNodeRef = (Node) get(index); 
             //Create a copy to store the value of the object from the reference (with same next and prev)
             Node oldNodeTemp = new Node(oldNodeRef.getElement(), oldNodeRef.getPrev(), oldNodeRef.getNext());
             //Store the element in the position of the new index
             Node newNode = (Node) get(newIndex); 
-
             //Set the current to be the element to change
             setCurrent(index);
             curr.setElement(newNode.getElement());

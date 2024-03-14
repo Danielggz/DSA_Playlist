@@ -71,11 +71,44 @@ public class Genre implements StackInterface{
            output += name + " list is empty!";
        }else{
            for (int i = 0; i<genreStack.size(); i++){
-               output += genreStack.get(i).toString();
+               output += (i+1) + ". " + genreStack.get(i).toString();
            }
            output += "\nNumber of" + name +  " songs: " + size();
        }
        return output;
+    }
+    
+    public Song search(String name){
+        //Iterates element to find by Name
+        for (int i  = 1; i < genreStack.size(); i++){
+            //Get element from node and cast it to Song type
+            Song currSong = (Song) genreStack.get(i);
+            if(name.equalsIgnoreCase(currSong.getName())){
+                //If the searched name is equal to the song in the current node return
+                return currSong;
+            }
+        }
+        return null;
+    }
+    
+    public void move(int index, int newIndex){
+        //The positions indicated by user are not 0 based
+        index--;
+        newIndex--;
+        if(index >= 0 && index <= size() && newIndex >= 0 && newIndex <= size()){
+            Object obj1 = genreStack.get(index);
+            Object obj2 = genreStack.get(newIndex);
+            //Store object1 in temporary object
+            Object tempO = obj1;
+            //Remove the stack element in index and add the second object
+            genreStack.remove(index);
+            genreStack.add(index, obj2);
+            //Remove the stack element in second index and add the temp (original is gone)
+            genreStack.remove(newIndex);
+            genreStack.add(newIndex, tempO);
+        }else{
+            System.out.println("One of the positions given is out of the bounds of array");
+        }
     }
     
 }

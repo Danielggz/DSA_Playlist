@@ -16,23 +16,23 @@ public class MusicGUI extends javax.swing.JFrame {
      * Creates new form MusicGUI
      */
     Playlist playList;
-    Genre rockG;
-    Genre classicalG;
+    Genre genreR;
+    Genre genreC;
     public MusicGUI() {
         initComponents();
         playList = new Playlist();
-        rockG = new Genre("Rock");
-        classicalG = new Genre("Classical");
+        genreR = new Genre("Rock");
+        genreC = new Genre("Classical");
         //Add default values to the lists
         Song song1 = new Song("Walk this Way", "Aerosmith", "Toys In The Attic", "1975");
         Song song2 = new Song("Child in Time", "Deep Purple", "Deep Purple in Rock", "1970");
         Song song3 = new Song("Fortress", "Queens of the Stone Age", "Villains", "2017");
         playList.add(playList.size()+1, song1);
-        rockG.push(song1);
+        genreR.push(song1);
         playList.add(playList.size()+1, song2);
-        rockG.push(song2);
+        genreR.push(song2);
         playList.add(playList.size()+1, song3);
-        rockG.push(song3);
+        genreR.push(song3);
         
         //Trigger button to display in text area by default
         btnDisplayAll.doClick();
@@ -271,8 +271,7 @@ public class MusicGUI extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(checkRepeatable, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(286, 286, 286))
+                                        .addComponent(checkRepeatable, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblGenre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,8 +286,8 @@ public class MusicGUI extends javax.swing.JFrame {
                                             .addComponent(txtArtist)
                                             .addComponent(txtNameSong, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(cmbGenre, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtReleaseYear, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(37, 37, 37)))))
+                                            .addComponent(txtReleaseYear, javax.swing.GroupLayout.Alignment.LEADING))))
+                                .addGap(220, 220, 220)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -324,7 +323,7 @@ public class MusicGUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkRepeatable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(12, 12, 12)
@@ -378,8 +377,8 @@ public class MusicGUI extends javax.swing.JFrame {
     private void btnDisplayAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayAllActionPerformed
         // TODO add your handling code here:
         txtareaDisplayAll.setText(playList.printList());
-        txtareaDisplayR.setText(rockG.displayStack());
-        txtareaDisplayC.setText(classicalG.displayStack());
+        txtareaDisplayR.setText(genreR.displayStack());
+        txtareaDisplayC.setText(genreC.displayStack());
     }//GEN-LAST:event_btnDisplayAllActionPerformed
 
     private void btnAddSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSongActionPerformed
@@ -396,11 +395,11 @@ public class MusicGUI extends javax.swing.JFrame {
         switch(genreSel){
             case 1:
                 //Rock selected
-                rockG.push(newSong);
+                genreR.push(newSong);
                 break;
             case 2:
                 //Classical selected
-                classicalG.push(newSong);
+                genreC.push(newSong);
                 break;
         }
         if(name.isBlank() || genreSel == 0){
@@ -481,36 +480,114 @@ public class MusicGUI extends javax.swing.JFrame {
 
     private void btnDisplayRockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayRockActionPerformed
         // TODO add your handling code here:
-        txtareaDisplayR.setText(rockG.displayStack());
+        txtareaDisplayR.setText(genreR.displayStack());
     }//GEN-LAST:event_btnDisplayRockActionPerformed
 
     private void btnDisplayClassicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayClassicalActionPerformed
         // TODO add your handling code here:
-        txtareaDisplayC.setText(classicalG.displayStack());
+        txtareaDisplayC.setText(genreC.displayStack());
     }//GEN-LAST:event_btnDisplayClassicalActionPerformed
 
     private void btnDeleteCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCActionPerformed
         // TODO add your handling code here:
+        if(genreC.size() > 0){
+            Song delSong = (Song) genreC.pop();
+            JOptionPane.showMessageDialog(null, "The song '" + delSong.getName() + "' was successfully deleted!");
+        }else{
+            JOptionPane.showMessageDialog(null, "The list is empty!");
+        }
     }//GEN-LAST:event_btnDeleteCActionPerformed
 
     private void btnMoveCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveCActionPerformed
         // TODO add your handling code here:
+        if(genreC.size() > 0)
+        {
+            int currPos = 0;
+            int newPos = 0;
+            try {
+                //Handle error when the user doesn't introduce numbers
+                currPos = Integer.parseInt(JOptionPane.showInputDialog("Introduce the position of the Song you wish to move"));
+                newPos = Integer.parseInt(JOptionPane.showInputDialog("Introduce the new position on the list to move the Song"));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Please introduce valid numbers");
+            }
+            
+            genreC.move(currPos, newPos);
+        }else{
+            txtareaDisplayAll.setText("The playlist has less than two songs!");
+        }
     }//GEN-LAST:event_btnMoveCActionPerformed
 
     private void btnSearchCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCActionPerformed
         // TODO add your handling code here:
+        Song foundSong = null;
+        if(playList.size() > 0)
+        {
+            String nameSearch = JOptionPane.showInputDialog("Introduce song name to search");
+            if(nameSearch != null){
+                foundSong = genreC.search(nameSearch);
+                //Check if the song was found
+                if(foundSong != null){
+                    JOptionPane.showMessageDialog(null, "Element found: \n" + foundSong.toString());
+                }else{
+                    JOptionPane.showMessageDialog(null, "Song not found in the playlist!");
+                }
+            }
+        }else{
+            txtareaDisplayAll.setText("The playlist is empty!");
+        }
+        
     }//GEN-LAST:event_btnSearchCActionPerformed
 
     private void btnDeleteRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRActionPerformed
         // TODO add your handling code here:
+        if(genreR.size() > 0){
+            Song delSong = (Song) genreR.pop();
+            JOptionPane.showMessageDialog(null, "The song '" + delSong.getName() + "' was successfully deleted!");
+        }else{
+            JOptionPane.showMessageDialog(null, "The list is empty!");
+        }
+        
     }//GEN-LAST:event_btnDeleteRActionPerformed
 
     private void btnMoveRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveRActionPerformed
         // TODO add your handling code here:
+        if(genreR.size() > 0)
+        {
+            int currPos = 0;
+            int newPos = 0;
+            try {
+                //Handle error when the user doesn't introduce numbers
+                currPos = Integer.parseInt(JOptionPane.showInputDialog("Introduce the position of the Song you wish to move"));
+                newPos = Integer.parseInt(JOptionPane.showInputDialog("Introduce the new position on the list to move the Song"));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Please introduce valid numbers");
+            }
+            
+            genreR.move(currPos, newPos);
+        }else{
+            txtareaDisplayAll.setText("The playlist has less than two songs!");
+        }
     }//GEN-LAST:event_btnMoveRActionPerformed
 
     private void btnSearchRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchRActionPerformed
         // TODO add your handling code here:
+        Song foundSong = null;
+        if(genreR.size() > 0)
+        {
+            String nameSearch = JOptionPane.showInputDialog("Introduce song name to search");
+            if(nameSearch != null){
+                foundSong = genreR.search(nameSearch);
+                //Check if the song was found
+                if(foundSong != null){
+                    JOptionPane.showMessageDialog(null, "Element found: \n" + foundSong.toString());
+                }else{
+                    JOptionPane.showMessageDialog(null, "Song not found in the playlist!");
+                }
+            }
+        }else{
+            txtareaDisplayAll.setText("The playlist is empty!");
+        }
     }//GEN-LAST:event_btnSearchRActionPerformed
 
     private void checkRepeatableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkRepeatableActionPerformed
