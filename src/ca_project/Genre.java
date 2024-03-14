@@ -80,7 +80,7 @@ public class Genre implements StackInterface{
     
     public Song search(String name){
         //Iterates element to find by Name
-        for (int i  = 1; i < genreStack.size(); i++){
+        for (int i  = 1; i <= genreStack.size(); i++){
             //Get element from node and cast it to Song type
             Song currSong = (Song) genreStack.get(i);
             if(name.equalsIgnoreCase(currSong.getName())){
